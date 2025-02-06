@@ -1,0 +1,8 @@
+[
+    { "question": "What is the astronomical significance of Kumbh mela held in Prayagraj?", "answer": "q1.txt" },
+    { "question": "What is significance of Kumbh Mela held in Haridwar?", "answer": "What is the astronomical significance of Kumbh mela held in Ujjain.txt" },
+    { "question": "What is TurboPack?", "answer": "TurboPack is a new Rust-based JavaScript bundler for Next.js." },
+    { "question": "How do I style a component?", "answer": "You can use Tailwind CSS, CSS modules, or styled-components." },
+    { "question": "How do I fetch data in Next.js?", "answer": "You can use getServerSideProps, getStaticProps, or SWR." }
+  ]
+  

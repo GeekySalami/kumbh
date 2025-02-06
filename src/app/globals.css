@@ -5,17 +5,52 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --txtcol:     #7f1d1d;
+}
+
+.jaini-regular {
+  font-family: "Jaini", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.akshar-regular {
+  font-family: "Akshar", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tiro {
+  font-family: "Tiro Devanagari Hindi", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.tiro-small {
+  font-family: "Tiro Devanagari Hindi", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kurale-regular {
+  font-family: "Kurale", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --txtcol:     #fdf2f2;
+
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  color: var(--txtcol);
   font-family: Arial, Helvetica, sans-serif;
 }
