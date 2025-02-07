@@ -1,58 +1,94 @@
 "use client";
-import { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-const ToggleContent = ({ title }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [files, setFiles] = useState([]);
-  const [error, setError] = useState(null);
+async function fetchFiles(folderPath) {
+  const res = await fetch(
+    `/api/read-files?folder=${encodeURIComponent(folderPath)}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch files");
+  return res.json();
+}
 
-  useEffect(() => {
-    // Define the folder path relative to the project root
-    const folderPath = 'src/app/QNA/sec1';  // Example folder
+// Component to render a question with its toggleable answer,
+// including an enumeration number for the question.
+function QuestionAnswer({ content, questionNumber }) {
+  const [showAnswer, setShowAnswer] = useState(false);
 
-    // Call the API to get files
-    const fetchFiles = async () => {
-      try {
-        const response = await fetch(`/api/getFiles?folderPath=${folderPath}`);
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch files');
-        }
+  // Extract the content between <question> and </question>
+  const questionMatch = content.match(/<question>([\s\S]*?)<\/question>/i);
+  // Extract the content between <answer> and </answer>
+  const answerMatch = content.match(/<answer>([\s\S]*?)<\/answer>/i);
 
-        const data = await response.json();
-        setFiles(data.files);  // Set the files in the state
-      } catch (err) {
-        setError(err.message);  // Set the error in state if any
-      }
-    };
-
-    fetchFiles();
-  }, []); 
+  const questionText = questionMatch ? questionMatch[1] : "No question found.";
+  const answerText = answerMatch ? answerMatch[1] : "No answer found.";
 
   return (
-    <div className="p-4 border-none shadow-md">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex border-none items-center justify-between w-full text-lg font-semibold">
-        {title}
-        <span className="hover:dark:text-red-900 hover:text-black hover:transition ease-in-out">{isOpen ? "▲" : "▼"}</span>
-      </button>
-      <hr/>
-      {isOpen && (
-        <div className="border-none">
-          <ol>
-          {files.length > 0 ? (
-          files.map((file, index) => (
-            <li key={index}>{file}</li>
-          ))
-        ) : (
-          <p>No files found.</p>
-        )}
-          </ol>
+    <div style={{ marginBottom: "1rem" }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div>
+          <strong>Question {questionNumber}:</strong>{" "}
+          <span dangerouslySetInnerHTML={{ __html: questionText }} />
         </div>
+        <button
+          onClick={() => setShowAnswer((prev) => !prev)}
+          style={{ marginLeft: "1rem" }}
+        >
+          {showAnswer ? "Hide Answer" : "Show Answer"}
+        </button>
+      </div>
+      {showAnswer && (
+        <div
+          style={{ marginTop: "0.5rem" }}
+          dangerouslySetInnerHTML={{ __html: answerText }}
+        />
       )}
     </div>
   );
-};
+}
 
-export default ToggleContent;
+export default function ToggleContent() {
+  const [data, setData] = useState([]);
+  // State to control the visibility of the entire section (title + file list)
+  const [sectionExpanded, setSectionExpanded] = useState(true);
+
+  const title = "Astronomical Aspects";
+
+  useEffect(() => {
+    fetchFiles("src/app/QNA/sec1") // Example folder inside your project
+      .then(setData)
+      .catch(console.error);
+  }, []);
+
+  const toggleSection = () => {
+    setSectionExpanded((prev) => !prev);
+  };
+
+  return (
+    <div>
+      {/* Section header with a clickable title and toggle button */}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <h2
+          style={{ marginRight: "1rem", cursor: "pointer" }}
+          onClick={toggleSection}
+        >
+          {title}
+        </h2>
+        <button onClick={toggleSection}>
+          {sectionExpanded ? "Hide Section" : "Show Section"}
+        </button>
+      </div>
+      {/* Render the file listings only if the section is expanded */}
+      {sectionExpanded &&
+        data.map(({ file, content }, index) => (
+          <div
+            key={index}
+            style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}
+          >
+
+            {/* Pass the index + 1 to enumerate the questions */}
+            <QuestionAnswer content={content} questionNumber={index + 1} />
+          </div>
+        ))}
+    </div>
+  );
+}
