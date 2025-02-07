@@ -7,25 +7,8 @@ import faqData from "./faq.json"; // Import the JSON file
 // import Dropdown from "./dropdown";
 // import { useState } from "react";
 import ToggleContent from "./dropdown";
+import MyComponent from "./Mycomponent";
 
-
-import { useEffect, useState } from 'react';
-
-const ToggleContentSection = ({ title }) => {
-  const [content, setContent] = useState('');
-
-  useEffect(() => {
-    const fetchContent = async () => {
-      const res = await fetch(`/api/getContent?title=${title}`);
-      const data = await res.json();
-      setContent(data.map(item => item.content).join('\n'));
-    };
-
-    fetchContent();
-  }, [title]);
-
-  return <ToggleContent title={title} content={content} className="border-none" />;
-};
 
 export default function Home() {
 
@@ -59,7 +42,7 @@ export default function Home() {
         </h1>
         <div className="grid grid-cols-1 gap-4 p-4 pl-20">
         
-        <ToggleContentSection key={'lol'} title={'Astronomical Aspects'} />
+        <ToggleContent key={'lol'} />
         </div>
       </div>
     </div>
