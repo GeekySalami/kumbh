@@ -1,5 +1,9 @@
 "use client";
+import { CircleChevronUp } from "lucide-react";
 import React, { useState, useEffect } from "react";
+import { CiCircleChevUp } from "react-icons/ci";
+import { CiCircleChevDown } from "react-icons/ci";
+import { GiSpotedFlower } from "react-icons/gi";
 
 async function fetchFiles(folderPath) {
   const res = await fetch(
@@ -23,24 +27,25 @@ function QuestionAnswer({ content, questionNumber }) {
   const answerText = answerMatch ? answerMatch[1] : "No answer found.";
 
   return (
-    <div style={{ marginBottom: "1rem" }}>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div>
-          <strong>Question {questionNumber}:</strong>{" "}
-          <span dangerouslySetInnerHTML={{ __html: questionText }} />
+    <div className="kurale-regular" >
+      <div style={{ display: "flex", alignItems: "center" }} >
+        <div className="flex ">
+          <GiSpotedFlower className="size-9"/> &nbsp;
+          <span className="mt-1 text-xl" dangerouslySetInnerHTML={{ __html: questionText }} />
         </div>
         <button
           onClick={() => setShowAnswer((prev) => !prev)}
-          style={{ marginLeft: "1rem" }}
+          className="ml-auto"
         >
-          {showAnswer ? "Hide Answer" : "Show Answer"}
+          {showAnswer ? <CiCircleChevUp className="size-8"/> : <CiCircleChevDown className="size-8"/>}
         </button>
       </div>
-      {showAnswer && (
+      {showAnswer && (<div>
+        <div className="text-xl"><strong>Answer:</strong></div>
         <div
-          style={{ marginTop: "0.5rem" }}
           dangerouslySetInnerHTML={{ __html: answerText }}
         />
+        </div>
       )}
     </div>
   );
@@ -48,13 +53,11 @@ function QuestionAnswer({ content, questionNumber }) {
 
 export default function ToggleContent() {
   const [data, setData] = useState([]);
-  // State to control the visibility of the entire section (title + file list)
+  // State to control the visibility of the entire section (file list)
   const [sectionExpanded, setSectionExpanded] = useState(true);
 
-  const title = "Astronomical Aspects";
-
   useEffect(() => {
-    fetchFiles("src/app/QNA/sec1") // Example folder inside your project
+    fetchFiles("src/app/QNA2") // Example folder inside your project
       .then(setData)
       .catch(console.error);
   }, []);
@@ -65,26 +68,12 @@ export default function ToggleContent() {
 
   return (
     <div>
-      {/* Section header with a clickable title and toggle button */}
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <h2
-          style={{ marginRight: "1rem", cursor: "pointer" }}
-          onClick={toggleSection}
-        >
-          {title}
-        </h2>
-        <button onClick={toggleSection}>
-          {sectionExpanded ? "Hide Section" : "Show Section"}
-        </button>
-      </div>
-      {/* Render the file listings only if the section is expanded */}
-      {sectionExpanded &&
-        data.map(({ file, content }, index) => (
+  
+      {data.map(({ file, content }, index) => (
           <div
             key={index}
             style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}
           >
-
             {/* Pass the index + 1 to enumerate the questions */}
             <QuestionAnswer content={content} questionNumber={index + 1} />
           </div>
