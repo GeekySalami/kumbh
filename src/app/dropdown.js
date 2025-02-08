@@ -23,7 +23,7 @@ function QuestionAnswer({ content }) {
   return (
     <div className="kurale-regular">
       <div className="flex items-center">
-        <div className="flex">
+        <div className="flex cursor-pointer hover:text-black dark:hover:text-red-900 transition-all ease-in-out" onClick={() => setShowAnswer((prev) => !prev)}  >
           <GiSpotedFlower className="w-9 h-9 flex-none" /> &nbsp;
           <span className="mt-1 text-xl" dangerouslySetInnerHTML={{ __html: questionText }} />
         </div>

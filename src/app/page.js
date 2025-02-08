@@ -28,9 +28,11 @@ export default function Home() {
             </p>
           </div>
         </div>
-
-        <div className="grid grid-cols-1 gap-4 p-4 pl-20">
+        <div>
+        {/* <div className="bg-white opacity-10 z-0"></div>  */}
+        <div className="grid grid-cols-1 gap-4 p-8 pt-0 ">
           <ToggleContent />
+        </div>
         </div>
       </div>
     </div>

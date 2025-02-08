@@ -59,6 +59,16 @@ li{
 
   }
 }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 12px;
+  text-align: left;
+  border: 2px solid #7f1d1d ;
+
+}
 
 body {
   color: var(--foreground);
