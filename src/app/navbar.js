@@ -10,7 +10,7 @@ function Navbar() {
         <div className="text-7xl text-red-900 jaini-regular">
           <span >
             <a href='/'>
-              &nbsp;Kumbh 
+              &nbsp;Mahakumbh
             </a>
           </span>
         </div>
