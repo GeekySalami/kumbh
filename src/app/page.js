@@ -1,13 +1,13 @@
 "use client";
 // import { getQuestionsAndAnswers } from "./htmlfiles";
-import Image from "next/image";
+// import Image from "next/image";
 import Navbar from "./navbar";
-import Questionscard from "./questionscard";
-import faqData from "./faq.json"; // Import the JSON file
+// import Questionscard from "./questionscard";
+// import faqData from "./faq.json"; // Import the JSON file
 // import Dropdown from "./dropdown";
 import { useState, useEffect } from "react";
 import ToggleContent from "./dropdown";
-import MyComponent from "./Mycomponent";
+// import MyComponent from "./Mycomponent";
 import Typewriter from "./typewriter";
 
 export default function Home() {
