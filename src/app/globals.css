@@ -50,6 +50,9 @@ li{
   padding-bottom: 0.5rem;
 }
 
+em{
+  font-weight: bold;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
