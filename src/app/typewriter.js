@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from 'react';
 
 const Typewriter = ({ text, speed = 50, className = "" }) => {
