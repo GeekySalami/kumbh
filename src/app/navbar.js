@@ -42,6 +42,7 @@ function Navbar() {
           </span>
         </div>
       </nav>
+          </div>
     </div>
   );
 }
