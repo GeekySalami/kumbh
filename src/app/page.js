@@ -1,20 +1,15 @@
-"use client";
-// import { getQuestionsAndAnswers } from "./htmlfiles";
-// import Image from "next/image";
+
 import Navbar from "./navbar";
-// import Questionscard from "./questionscard";
-// import faqData from "./faq.json"; // Import the JSON file
-// import Dropdown from "./dropdown";
-import { useState, useEffect } from "react";
 import ToggleContent from "./dropdown";
-// import MyComponent from "./Mycomponent";
 import Typewriter from "./typewriter";
+import Contributors from "./contibuters";
+import Footer from "./footer";
 
 export default function Home() {
   return (
     <div>
       <Navbar />
-      <div className="pt-24">
+      <div className="pt-12 sm:pt-14 md:pt-20">
         <div className="bg-[url('kumbh3.jpg')] bg-cover bg-center h-[90vh] flex items-center justify-center">
           <div className="bg-[#000000a8] h-full w-full">
             <h2 className="text-4xl sm:text-5xl tiro text-white p-5 pt-20 pl-10">
@@ -35,6 +30,15 @@ export default function Home() {
         </div>
         </div>
       </div>
+
+      <div className="justify-center text-center p-4">
+        <p className="text-[2vw] underline">Contributors:</p>
+        <div className="flex justify-evenly p-3">
+        <Contributors key="1" name="Priya Mishra" position="Assistant Product Manager" />
+        <Contributors key="2" name="Sharvil Palvekar" position="ML Intern" />
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

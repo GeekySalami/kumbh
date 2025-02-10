@@ -56,7 +56,7 @@ export default function ToggleContent() {
   const [sectionExpanded, setSectionExpanded] = useState(true);
 
   useEffect(() => {
-    fetchFiles("src/app/QNA2")
+    fetchFiles("src/app/QNA2/en")
       .then(setData)
       .catch(console.error);
   }, []);
