@@ -17,6 +17,7 @@ function Navbar() {
           </div>
         </div>
 
+
         {/* Center Section - IITB Initiative */}
         <div className="flex items-center space-x-2 max-w-md">
           <img 
@@ -32,6 +33,13 @@ function Navbar() {
         {/* Right Section - Language Toggle */}
         <div className="flex-shrink-0">
           <LanguageToggle />
+
+        <div className="text-7xl text-red-900 jaini-regular">
+          <span >
+            <a href='/'>
+              &nbsp;Mahakumbh
+            </a>
+          </span>
         </div>
       </nav>
     </div>
